@@ -6,10 +6,9 @@ module.exports = async () => {
             useUnifiedTopology: true,
             useNewUrlParser: true,
         });
-        console.log(
-            "[Mongodb]".blue.bold +
-                ` connected to ${conn.connection.host}`.magenta.bold
-        );
+        const flag = "[Mongodb]".blue.bold;
+        const message = ` connected to (${conn.connection.name})`.magenta.bold;
+        console.log(flag + message);
     } catch (error) {
         console.log(`${error.message}`.red.underline.bold);
         process.exit(1);
