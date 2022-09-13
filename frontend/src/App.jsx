@@ -9,6 +9,7 @@ import {
     Profile,
     Register,
     Shipping,
+    UserList,
 } from 'pages';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -44,6 +45,7 @@ export default function App() {
                                 element={<PlaceOrder />}
                             />
                             <Route path="/order/:id" element={<Order />} />
+                            <Route path="/admin/users" element={<UserList />} />
                         </Routes>
                     </Container>
                 </main>

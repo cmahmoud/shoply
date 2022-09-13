@@ -8,6 +8,7 @@ import Product from './Product';
 import Profile from './Profile';
 import Register from './Register';
 import Shipping from './Shipping';
+import UserList from './UserList';
 
 export {
     Home,
@@ -20,4 +21,5 @@ export {
     Shipping,
     Profile,
     PlaceOrder,
+    UserList,
 };

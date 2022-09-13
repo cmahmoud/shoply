@@ -1,6 +1,9 @@
 const User = require("../models/user.model");
 const isAuthenticated = require("../middleware/auth");
 const isAdmin = require("../middleware/admin");
+const isValidId = require("../middleware/validateId");
+const Product = require("../models/product.model");
+const Order = require("../models/order.model");
 
 // @desc Get user profile
 // @route /api/user/profile
@@ -53,6 +56,30 @@ module.exports.updateProfile = [
             name: user.name,
             isAdmin: user.isAdmin,
             email: user.email,
+        });
+    },
+];
+
+// @desc delete user
+// @route /api/user/:id/delete
+// @method DELETE
+// @access Private
+module.exports.deleteUser = [
+    isAuthenticated,
+    isValidId,
+    async (req, res) => {
+        const user = await User.findById(req.params.id);
+        const admin = await User.findById(req.user.id);
+        const isEqual = user._id.equals(admin._id) || admin.isAdmin;
+        if (!isEqual) {
+            return res.status(401).json({ message: "Access Denied" });
+        }
+        await user.remove();
+        await Product.deleteMany({ user: user._id });
+        await Order.deleteMany({ user: user._id });
+        res.status(200).send({
+            message: "user deleted successfully",
+            id: user.id,
         });
     },
 ];
