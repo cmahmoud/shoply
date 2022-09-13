@@ -67,7 +67,7 @@ export default function UserList() {
                                 </td>
                                 <td>
                                     <LinkContainer
-                                        to={`/user/${user._id}/edit`}
+                                        to={`/admin/user/${user._id}/edit`}
                                     >
                                         <Button
                                             variant="light"

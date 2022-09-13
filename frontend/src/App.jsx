@@ -9,6 +9,7 @@ import {
     Profile,
     Register,
     Shipping,
+    UserEdit,
     UserList,
 } from 'pages';
 import { Container } from 'react-bootstrap';
@@ -46,6 +47,10 @@ export default function App() {
                             />
                             <Route path="/order/:id" element={<Order />} />
                             <Route path="/admin/users" element={<UserList />} />
+                            <Route
+                                path="/admin/user/:id/edit"
+                                element={<UserEdit />}
+                            />
                         </Routes>
                     </Container>
                 </main>

@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import deleteUser from 'app/actions/admin/deleteUser';
+import getUser from 'app/actions/admin/getUser';
 import getUsers from 'app/actions/admin/getUsers';
+import updateUser from 'app/actions/admin/updateUser';
 
 const initialState = {
     users: null,
+    user: null,
     loading: false,
     error: null,
 };
@@ -13,6 +16,7 @@ const adminSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        /// get all users
         builder.addCase(getUsers.pending, (state, action) => {
             state.loading = true;
         });
@@ -25,18 +29,43 @@ const adminSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         });
-        builder.addCase(deleteUser.pending, (state, action) => {
+        /// get single user
+        builder.addCase(getUser.pending, (state, action) => {
             state.loading = true;
         });
-        builder.addCase(deleteUser.fulfilled, (state, action) => {
-            state.users = state.users.filter(
-                (user) => user._id !== action.payload.id,
-            );
+        builder.addCase(getUser.fulfilled, (state, { payload }) => {
+            state.user = payload;
             state.error = null;
             state.loading = false;
         });
-        builder.addCase(deleteUser.rejected, (state, action) => {
+        builder.addCase(getUser.rejected, (state, action) => {
             state.error = action.payload;
+            state.loading = false;
+        });
+        /// update user
+        builder.addCase(updateUser.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+            state.user = payload;
+            state.error = null;
+            state.loading = false;
+        });
+        builder.addCase(updateUser.rejected, (state, { payload }) => {
+            state.error = payload;
+            state.loading = false;
+        });
+        /// delete user
+        builder.addCase(deleteUser.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(deleteUser.fulfilled, (state, { payload }) => {
+            state.users = state.users.filter((user) => user._id !== payload.id);
+            state.error = null;
+            state.loading = false;
+        });
+        builder.addCase(deleteUser.rejected, (state, { payload }) => {
+            state.error = payload;
             state.loading = false;
         });
     },

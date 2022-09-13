@@ -34,6 +34,20 @@ module.exports.getAll = [
         res.status(200).json(users);
     },
 ];
+// @desc Get user by id
+// @route /api/user/:id
+// @method Get
+// @access Private
+module.exports.getUserById = [
+    isAuthenticated,
+    async (req, res) => {
+        const user = await User.findById(req.params.id).select("-password");
+        if (!user) {
+            return res.status(400).json({ message: "invalid email" });
+        }
+        res.status(200).json(user);
+    },
+];
 
 // @desc Update user profile
 // @route /api/user/profile
@@ -52,6 +66,30 @@ module.exports.updateProfile = [
         const token = user.generateToken();
         res.status(200).json({
             token,
+            id: user._id,
+            name: user.name,
+            isAdmin: user.isAdmin,
+            email: user.email,
+        });
+    },
+];
+// @desc Update user profile
+// @route /api/user/profile
+// @method PUT
+// @access Private
+module.exports.updateUserById = [
+    isAuthenticated,
+    async (req, res) => {
+        const user = await User.findById(req.params.id).select("-password");
+        if (!user) {
+            return res.status(400).json({ message: "invalid id" });
+        }
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.isAdmin = req.body.isAdmin;
+
+        await user.save();
+        res.status(200).json({
             id: user._id,
             name: user.name,
             isAdmin: user.isAdmin,
