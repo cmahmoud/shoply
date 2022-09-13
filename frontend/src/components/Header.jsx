@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { logout } from "app/slices/auth.slice";
+import { logout } from "app/slices/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addPaymentMethod } from "app/slices/cart.slice";
+import { addPaymentMethod } from "app/slices/cart";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "components/CheckoutSteps";
 
