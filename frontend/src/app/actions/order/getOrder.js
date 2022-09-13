@@ -1,8 +1,8 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export default createAsyncThunk(
-    "order/get",
+    'order/get',
     async (id, { rejectWithValue, getState }) => {
         try {
             const {
@@ -17,5 +17,5 @@ export default createAsyncThunk(
         } catch (error) {
             return rejectWithValue(error.response.data);
         }
-    }
+    },
 );

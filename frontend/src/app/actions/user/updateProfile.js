@@ -1,14 +1,14 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export default createAsyncThunk(
-    "profile/update",
+    'profile/update',
     async (userData, { rejectWithValue, getState }) => {
         try {
             const {
                 auth: { user },
             } = getState();
-            const { data } = await axios.put("/api/user/profile", userData, {
+            const { data } = await axios.put('/api/user/profile', userData, {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
                 },
@@ -17,5 +17,5 @@ export default createAsyncThunk(
         } catch (error) {
             return rejectWithValue(error.response.data);
         }
-    }
+    },
 );

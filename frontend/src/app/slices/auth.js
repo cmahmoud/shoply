@@ -1,28 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
-import loginAction from "app/actions/auth/login";
-import getProfile from "app/actions/user/getProfile";
-import registerAction from "app/actions/auth/register";
-import updateProfile from "app/actions/user/updateProfile";
+import { createSlice } from '@reduxjs/toolkit';
+
+import loginAction from 'app/actions/auth/login';
+import registerAction from 'app/actions/auth/register';
+import getProfile from 'app/actions/user/getProfile';
+import updateProfile from 'app/actions/user/updateProfile';
 
 const initialState = {
-    user: localStorage.getItem("user")
-        ? JSON.parse(localStorage.getItem("user"))
+    user: localStorage.getItem('user')
+        ? JSON.parse(localStorage.getItem('user'))
         : null,
     loading: false,
     error: null,
     profile: null,
 };
 const authSlice = createSlice({
-    name: "auth",
+    name: 'auth',
     initialState,
     reducers: {
         logout: (state, action) => {
             state.user = null;
             state.profile = null;
-            localStorage.removeItem("user");
-            localStorage.removeItem("cart");
-            localStorage.removeItem("payment");
-            localStorage.removeItem("shippingAddress");
+            localStorage.removeItem('user');
+            localStorage.removeItem('cart');
+            localStorage.removeItem('payment');
+            localStorage.removeItem('shippingAddress');
         },
     },
     extraReducers: (builder) => {
@@ -34,7 +35,7 @@ const authSlice = createSlice({
             state.user = action.payload;
             state.loading = false;
             state.error = null;
-            localStorage.setItem("user", JSON.stringify(action.payload));
+            localStorage.setItem('user', JSON.stringify(action.payload));
         });
         builder.addCase(loginAction.rejected, (state, action) => {
             state.user = null;
@@ -49,7 +50,7 @@ const authSlice = createSlice({
             state.user = action.payload;
             state.loading = false;
             state.error = null;
-            localStorage.setItem("user", JSON.stringify(action.payload));
+            localStorage.setItem('user', JSON.stringify(action.payload));
         });
         builder.addCase(registerAction.rejected, (state, action) => {
             state.user = null;
@@ -80,7 +81,7 @@ const authSlice = createSlice({
             state.profile = action.payload;
             state.loading = false;
             state.error = null;
-            localStorage.setItem("user", JSON.stringify(action.payload));
+            localStorage.setItem('user', JSON.stringify(action.payload));
         });
         builder.addCase(updateProfile.rejected, (state, action) => {
             state.loading = false;

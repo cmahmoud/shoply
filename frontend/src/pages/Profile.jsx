@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import getProfile from "app/actions/user/getProfile";
-import updateProfile from "app/actions/user/updateProfile";
-import { Button, Col, Form, Row, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import getOrders from "app/actions/user/getOrders";
-import Loader from "components/Loader";
-import { LinkContainer } from "react-router-bootstrap";
+import React, { useEffect } from 'react';
+import { Button, Col, Form, Row, Table } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
+import getOrders from 'app/actions/user/getOrders';
+import getProfile from 'app/actions/user/getProfile';
+import updateProfile from 'app/actions/user/updateProfile';
+
+import Loader from 'components/Loader';
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -18,7 +20,7 @@ export default function Profile() {
             dispatch(getProfile());
             dispatch(getOrders());
         } else {
-            navigate("/login");
+            navigate('/login');
         }
     }, [dispatch, navigate, user]);
 
@@ -86,7 +88,7 @@ export default function Profile() {
                                             <td>
                                                 {item.createdAt.substring(
                                                     0,
-                                                    10
+                                                    10,
                                                 )}
                                             </td>
                                             <td>{item.totalPrice}</td>
@@ -101,7 +103,7 @@ export default function Profile() {
                                                 {item.isDelivered ? (
                                                     item.deliveredAt.substring(
                                                         0,
-                                                        10
+                                                        10,
                                                     )
                                                 ) : (
                                                     <i className="fas fa-times text-danger" />

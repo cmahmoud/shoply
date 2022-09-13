@@ -1,16 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
-import addItem from "app/actions/cart/addItem";
+import { createSlice } from '@reduxjs/toolkit';
 
-const items = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
+import addItem from 'app/actions/cart/addItem';
+
+const items = localStorage.getItem('cart')
+    ? JSON.parse(localStorage.getItem('cart'))
     : [];
 
-const shippingAddress = localStorage.getItem("shippingAddress")
-    ? JSON.parse(localStorage.getItem("shippingAddress"))
+const shippingAddress = localStorage.getItem('shippingAddress')
+    ? JSON.parse(localStorage.getItem('shippingAddress'))
     : {};
 
-const payment = localStorage.getItem("payment")
-    ? JSON.parse(localStorage.getItem("payment"))
+const payment = localStorage.getItem('payment')
+    ? JSON.parse(localStorage.getItem('payment'))
     : {};
 
 const initialState = {
@@ -19,25 +20,25 @@ const initialState = {
     payment,
 };
 const cartSlice = createSlice({
-    name: "cart",
+    name: 'cart',
     initialState,
     reducers: {
         removeItemFromCart: (state, action) => {
             state.items = state.items.filter(
-                (x) => x.product !== action.payload
+                (x) => x.product !== action.payload,
             );
-            localStorage.setItem("cart", JSON.stringify(state.items));
+            localStorage.setItem('cart', JSON.stringify(state.items));
         },
         addShippingAddress: (state, action) => {
             state.shippingAddress = action.payload;
             localStorage.setItem(
-                "shippingAddress",
-                JSON.stringify(state.shippingAddress)
+                'shippingAddress',
+                JSON.stringify(state.shippingAddress),
             );
         },
         addPaymentMethod: (state, action) => {
             state.payment = action.payload;
-            localStorage.setItem("payment", JSON.stringify(state.payment));
+            localStorage.setItem('payment', JSON.stringify(state.payment));
         },
     },
     extraReducers: (builder) => {
@@ -49,11 +50,11 @@ const cartSlice = createSlice({
             const isExist = state.items.find((x) => x.product === item.product);
             if (isExist) {
                 state.items = state.items.map((x) =>
-                    x.product === item.product ? item : x
+                    x.product === item.product ? item : x,
                 );
             } else {
                 state.items.push(item);
-                localStorage.setItem("cart", JSON.stringify(state.items));
+                localStorage.setItem('cart', JSON.stringify(state.items));
             }
         });
     },

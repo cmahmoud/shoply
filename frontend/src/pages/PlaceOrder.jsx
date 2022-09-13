@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
-import { Button, Col, Row, ListGroup, Image, Alert } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import CheckoutSteps from "components/CheckoutSteps";
-import { Link, useNavigate } from "react-router-dom";
-import createOrder from "app/actions/order/createOrder";
+import React, { useEffect } from 'react';
+import { Alert, Button, Col, Image, ListGroup, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
+import createOrder from 'app/actions/order/createOrder';
+
+import CheckoutSteps from 'components/CheckoutSteps';
 
 export default function PlaceOrder() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { shippingAddress, payment, items } = useSelector(
-        (state) => state.cart
+        (state) => state.cart,
     );
     const { order, error } = useSelector((state) => state.orders);
     // price
@@ -18,12 +20,12 @@ export default function PlaceOrder() {
         return Number((Math.round(num * 100) / 100).toFixed(2));
     };
     const itemsPrice = addDecimal(
-        items.reduce((acc, item) => acc + item.price * item.qty, 0)
+        items.reduce((acc, item) => acc + item.price * item.qty, 0),
     );
     const shippingPrice = addDecimal(itemsPrice > 100 ? 25.5 : 50);
     const taxPrice = addDecimal(0.05 * itemsPrice);
     const totalPrice = Number(
-        (taxPrice + shippingPrice + itemsPrice).toFixed(2)
+        (taxPrice + shippingPrice + itemsPrice).toFixed(2),
     );
 
     useEffect(() => {
@@ -42,7 +44,7 @@ export default function PlaceOrder() {
                 shippingAddress,
                 orderItems: items,
                 paymentMethod: payment.method,
-            })
+            }),
         );
     };
     return (
@@ -55,9 +57,9 @@ export default function PlaceOrder() {
                             <h2>Shipping</h2>
                             <p>
                                 <strong>Address: </strong>
-                                {shippingAddress?.address},{" "}
-                                {shippingAddress?.city},{" "}
-                                {shippingAddress?.postalcode},{" "}
+                                {shippingAddress?.address},{' '}
+                                {shippingAddress?.city},{' '}
+                                {shippingAddress?.postalcode},{' '}
                                 {shippingAddress?.country}
                             </p>
                         </ListGroup.Item>
@@ -94,8 +96,8 @@ export default function PlaceOrder() {
                                                         </Link>
                                                     </Col>
                                                     <Col md={4}>
-                                                        {item.qty} x{" "}
-                                                        {item.price} ={" "}
+                                                        {item.qty} x{' '}
+                                                        {item.price} ={' '}
                                                         {item.price * item.qty}
                                                     </Col>
                                                 </Row>

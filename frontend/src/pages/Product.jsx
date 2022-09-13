@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
 import {
-    Row,
+    Button,
+    Card,
     Col,
+    Form,
     Image,
     ListGroup,
-    Card,
-    Button,
-    Form,
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Rating from "components/Rating";
-import getProductById from "app/actions/products/getById";
-import { useDispatch, useSelector } from "react-redux";
-import Loader from "components/Loader";
+    Row,
+} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import getProductById from 'app/actions/products/getById';
+
+import Loader from 'components/Loader';
+import Rating from 'components/Rating';
 
 export default function Product() {
     const { id } = useParams();
@@ -78,8 +80,8 @@ export default function Product() {
                                         <Col>Status:</Col>
                                         <Col>
                                             {product.countInStock > 0
-                                                ? "In Stock"
-                                                : "Out Of Stock"}
+                                                ? 'In Stock'
+                                                : 'Out Of Stock'}
                                         </Col>
                                     </Row>
                                 </ListGroup.Item>
@@ -96,7 +98,7 @@ export default function Product() {
                                                 >
                                                     {[
                                                         ...Array(
-                                                            product.countInStock
+                                                            product.countInStock,
                                                         ).keys(),
                                                     ].map((x, i) => (
                                                         <option key={i}>

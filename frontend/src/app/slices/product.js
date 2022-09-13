@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import getAllProducts from "app/actions/products/getAll";
-import getProductById from "app/actions/products/getById";
+import { createSlice } from '@reduxjs/toolkit';
+
+import getAllProducts from 'app/actions/products/getAll';
+import getProductById from 'app/actions/products/getById';
 
 const initialState = {
     list: [],
@@ -8,7 +9,7 @@ const initialState = {
     loading: false,
 };
 const productSlice = createSlice({
-    name: "products",
+    name: 'products',
     initialState,
     reducers: {},
     extraReducers: (builder) => {

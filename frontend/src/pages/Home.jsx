@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
-import ProductCard from "components/ProductCard";
-import { useDispatch, useSelector } from "react-redux";
-import getAllProducts from "app/actions/products/getAll";
-import Loader from "components/Loader";
+import React, { useEffect } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+
+import getAllProducts from 'app/actions/products/getAll';
+
+import Loader from 'components/Loader';
+import ProductCard from 'components/ProductCard';
 
 export default function Home() {
     const dispatch = useDispatch();

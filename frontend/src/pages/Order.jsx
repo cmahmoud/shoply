@@ -1,11 +1,13 @@
-import getOrder from "app/actions/order/getOrder";
-import React, { useEffect } from "react";
-import { Alert, Button, Col, Image, ListGroup, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import Loader from "components/Loader";
-import payOrder from "app/actions/order/payOrder";
+import React, { useEffect } from 'react';
+import { Alert, Button, Col, Image, ListGroup, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+import getOrder from 'app/actions/order/getOrder';
+import payOrder from 'app/actions/order/payOrder';
+
+import Loader from 'components/Loader';
 
 export default function Order() {
     const dispatch = useDispatch();
@@ -16,7 +18,7 @@ export default function Order() {
 
     useEffect(() => {
         if (!user) {
-            navigate("/login", { state: { from: `/order/${id}` } });
+            navigate('/login', { state: { from: `/order/${id}` } });
         } else {
             dispatch(getOrder(id));
         }
@@ -48,9 +50,9 @@ export default function Order() {
                                 </p>
                                 <p>
                                     <strong>Address: </strong>
-                                    {order.shippingAddress?.address},{" "}
-                                    {order.shippingAddress?.city},{" "}
-                                    {order.shippingAddress?.postalcode},{" "}
+                                    {order.shippingAddress?.address},{' '}
+                                    {order.shippingAddress?.city},{' '}
+                                    {order.shippingAddress?.postalcode},{' '}
                                     {order.shippingAddress?.country}
                                 </p>
                                 {order.isDelivered ? (
@@ -105,8 +107,8 @@ export default function Order() {
                                                             </Link>
                                                         </Col>
                                                         <Col md={4}>
-                                                            {item.qty} x{" "}
-                                                            {item.price} ={" "}
+                                                            {item.qty} x{' '}
+                                                            {item.price} ={' '}
                                                             {item.price *
                                                                 item.qty}
                                                         </Col>

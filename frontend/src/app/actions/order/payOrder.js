@@ -1,8 +1,8 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export default createAsyncThunk(
-    "order/pay",
+    'order/pay',
     async (id, { rejectWithValue, getState }) => {
         try {
             const {
@@ -15,11 +15,11 @@ export default createAsyncThunk(
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                     },
-                }
+                },
             );
             return data;
         } catch (error) {
             return rejectWithValue(error.response.data);
         }
-    }
+    },
 );

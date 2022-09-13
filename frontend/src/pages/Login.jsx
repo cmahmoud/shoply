@@ -1,10 +1,12 @@
-import loginAction from "app/actions/auth/login";
-import React, { useEffect } from "react";
-import { Alert, Button, Col, Form, Row, Stack } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
-import Loader from "components/Loader";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Alert, Button, Col, Form, Row, Stack } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+import loginAction from 'app/actions/auth/login';
+
+import Loader from 'components/Loader';
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -14,7 +16,7 @@ export default function Login() {
     console.log();
     useEffect(() => {
         if (auth.user) {
-            navigate("/");
+            navigate('/');
         }
     }, [auth.user, navigate]);
     const loginHandle = (e) => {

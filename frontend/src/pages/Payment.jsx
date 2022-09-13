@@ -1,16 +1,18 @@
-import React from "react";
-import { Button, Form, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { addPaymentMethod } from "app/slices/cart";
-import { useNavigate } from "react-router-dom";
-import CheckoutSteps from "components/CheckoutSteps";
+import React from 'react';
+import { Button, Col, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { addPaymentMethod } from 'app/slices/cart';
+
+import CheckoutSteps from 'components/CheckoutSteps';
 
 export default function Payment() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { shippingAddress, payment } = useSelector((state) => state.cart);
     if (!shippingAddress) {
-        navigate("/shipping", { state: { from: "/payment" } });
+        navigate('/shipping', { state: { from: '/payment' } });
     }
 
     const handleSubmit = (e) => {
@@ -18,7 +20,7 @@ export default function Payment() {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
         dispatch(addPaymentMethod(data));
-        navigate("/placeorder");
+        navigate('/placeorder');
     };
     return (
         <div>
@@ -35,7 +37,7 @@ export default function Payment() {
                             id="Paypal"
                             defaultValue="Paypal"
                             name="method"
-                            defaultChecked={payment.method === "Paypal"}
+                            defaultChecked={payment.method === 'Paypal'}
                         ></Form.Check>
                         <Form.Check
                             type="radio"
@@ -43,7 +45,7 @@ export default function Payment() {
                             id="Stripe"
                             defaultValue="Stripe"
                             name="method"
-                            defaultChecked={payment.method === "Stripe"}
+                            defaultChecked={payment.method === 'Stripe'}
                         ></Form.Check>
                     </Col>
                 </Form.Group>

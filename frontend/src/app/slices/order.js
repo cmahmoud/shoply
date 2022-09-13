@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import createOrder from "app/actions/order/createOrder";
-import getOrder from "app/actions/order/getOrder";
-import getOrders from "app/actions/user/getOrders";
-import payOrder from "app/actions/order/payOrder";
+import { createSlice } from '@reduxjs/toolkit';
+
+import createOrder from 'app/actions/order/createOrder';
+import getOrder from 'app/actions/order/getOrder';
+import payOrder from 'app/actions/order/payOrder';
+import getOrders from 'app/actions/user/getOrders';
 
 const initialState = {
     order: null,
@@ -11,7 +12,7 @@ const initialState = {
     error: null,
 };
 const orderSlice = createSlice({
-    name: "orders",
+    name: 'orders',
     initialState,
     reducers: {},
     extraReducers: (builder) => {

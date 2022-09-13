@@ -1,9 +1,11 @@
-import React from "react";
-import { Button, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { addShippingAddress } from "app/slices/cart";
-import { useNavigate } from "react-router-dom";
-import CheckoutSteps from "components/CheckoutSteps";
+import React from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { addShippingAddress } from 'app/slices/cart';
+
+import CheckoutSteps from 'components/CheckoutSteps';
 
 export default function Shipping() {
     const dispatch = useDispatch();
@@ -15,7 +17,7 @@ export default function Shipping() {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
         dispatch(addShippingAddress(data));
-        navigate("/payment");
+        navigate('/payment');
     };
     return (
         <div>

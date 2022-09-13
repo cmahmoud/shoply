@@ -1,9 +1,10 @@
-import React from "react";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { LinkContainer } from "react-router-bootstrap";
-import { logout } from "app/slices/auth";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
+import { logout } from 'app/slices/auth';
 
 export default function Header() {
     const dispatch = useDispatch();
@@ -11,7 +12,7 @@ export default function Header() {
     const auth = useSelector((state) => state.auth);
     const handleLogout = () => {
         dispatch(logout());
-        navigate("/", { replace: true });
+        navigate('/', { replace: true });
     };
     return (
         <header>

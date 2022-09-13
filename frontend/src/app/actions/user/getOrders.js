@@ -1,14 +1,14 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export default createAsyncThunk(
-    "orders/get",
+    'orders/get',
     async (id, { rejectWithValue, getState }) => {
         try {
             const {
                 auth: { user },
             } = getState();
-            const { data } = await axios.get("/api/order/myorders", {
+            const { data } = await axios.get('/api/order/myorders', {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
                 },
@@ -17,5 +17,5 @@ export default createAsyncThunk(
         } catch (error) {
             return rejectWithValue(error.response.data);
         }
-    }
+    },
 );

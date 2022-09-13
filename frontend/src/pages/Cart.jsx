@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
-import { useSearchParams, useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import addItem from "app/actions/cart/addItem";
-import { removeItemFromCart } from "app/slices/cart";
+import React, { useEffect } from 'react';
 import {
-    Col,
-    Row,
     Alert,
-    ListGroup,
-    Image,
-    Form,
     Button,
     Card,
+    Col,
     Container,
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
+    Form,
+    Image,
+    ListGroup,
+    Row,
+} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import addItem from 'app/actions/cart/addItem';
+import { removeItemFromCart } from 'app/slices/cart';
 
 export default function Cart() {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function Cart() {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
     let [searchParams] = useSearchParams();
-    const qty = Number(searchParams.get("qty"));
+    const qty = Number(searchParams.get('qty'));
     const cart = useSelector((state) => state.cart.items);
     useEffect(() => {
         if (id) {
@@ -34,9 +35,9 @@ export default function Cart() {
     };
     const checkoutHandler = () => {
         if (user) {
-            navigate("/shipping");
+            navigate('/shipping');
         } else {
-            navigate("/login", { state: { from: "/shipping" } });
+            navigate('/login', { state: { from: '/shipping' } });
         }
     };
     return (
@@ -79,15 +80,15 @@ export default function Cart() {
                                                                 id: item.product,
                                                                 qty: Number(
                                                                     e.target
-                                                                        .value
+                                                                        .value,
                                                                 ),
-                                                            })
+                                                            }),
                                                         )
                                                     }
                                                 >
                                                     {[
                                                         ...Array(
-                                                            item.countInStock
+                                                            item.countInStock,
                                                         ).keys(),
                                                     ].map((x, i) => (
                                                         <option key={i}>
@@ -103,7 +104,7 @@ export default function Cart() {
                                                     className="w-100"
                                                     onClick={() =>
                                                         removeItemHandler(
-                                                            item.product
+                                                            item.product,
                                                         )
                                                     }
                                                 >
@@ -125,7 +126,7 @@ export default function Cart() {
                                     Subtotal (
                                     {cart.reduce(
                                         (acc, item) => acc + item.qty,
-                                        0
+                                        0,
                                     )}
                                     ) items
                                 </h2>
@@ -134,7 +135,7 @@ export default function Cart() {
                                     .reduce(
                                         (acc, item) =>
                                             acc + item.qty * item.price,
-                                        0
+                                        0,
                                     )
                                     .toFixed(2)}
                             </ListGroup.Item>

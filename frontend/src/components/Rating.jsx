@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Rating({ rating, reviews }) {
     return (
@@ -9,10 +9,10 @@ export default function Rating({ rating, reviews }) {
                         <i
                             className={
                                 rating >= num
-                                    ? "fas fa-star"
+                                    ? 'fas fa-star'
                                     : rating >= num - 0.5
-                                    ? "fas fa-star-half-alt"
-                                    : "far fa-star"
+                                    ? 'fas fa-star-half-alt'
+                                    : 'far fa-star'
                             }
                         />
                     </span>

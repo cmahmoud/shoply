@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Alert, Button, Col, Form, Row, Stack } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import registerAction from "app/actions/auth/register";
-import Loader from "components/Loader";
+import React, { useEffect, useState } from 'react';
+import { Alert, Button, Col, Form, Row, Stack } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+
+import registerAction from 'app/actions/auth/register';
+
+import Loader from 'components/Loader';
 
 export default function Register() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [message, setMessage] = useState(null);
     const [searchParams] = useSearchParams();
-    const redirect = searchParams.get("redirect");
+    const redirect = searchParams.get('redirect');
     const auth = useSelector((state) => state.auth);
 
     useEffect(() => {
         if (auth.user) {
-            navigate("/");
+            navigate('/');
         }
     }, [auth.user, navigate]);
 
@@ -29,7 +31,7 @@ export default function Register() {
         dispatch(registerAction(data));
         setMessage(null);
         if (!auth.error.message) {
-            navigate(redirect ? redirect : "/");
+            navigate(redirect ? redirect : '/');
         }
     };
     return auth.loading ? (
