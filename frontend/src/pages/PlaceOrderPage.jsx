@@ -3,7 +3,7 @@ import { Button, Col, Row, ListGroup, Image, Alert } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutSteps from "components/CheckoutSteps";
 import { Link, useNavigate } from "react-router-dom";
-import orderItemAction from "app/actions/createOrderItem.action";
+import createOrder from "app/actions/order/createOrder";
 
 export default function PlaceOrderPage() {
     const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export default function PlaceOrderPage() {
 
     const handlePlaceOrder = () => {
         dispatch(
-            orderItemAction({
+            createOrder({
                 itemsPrice,
                 shippingPrice,
                 taxPrice,

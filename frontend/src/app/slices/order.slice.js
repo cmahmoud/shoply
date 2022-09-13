@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import orderItemAction from "app/actions/createOrderItem.action";
-import getOrderDataAction from "app/actions/getOrderData.action";
-import getUserOrdersAction from "app/actions/getUserOrders.action";
-import payOrderAction from "app/actions/payOrder.action";
+import createOrder from "app/actions/order/createOrder";
+import getOrder from "app/actions/order/getOrder";
+import getOrders from "app/actions/user/getOrders";
+import payOrder from "app/actions/order/payOrder";
 
 const initialState = {
     order: null,
@@ -15,55 +15,55 @@ const orderSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(orderItemAction.pending, (state, action) => {
+        builder.addCase(createOrder.pending, (state, action) => {
             state.loading = true;
         });
-        builder.addCase(orderItemAction.fulfilled, (state, action) => {
+        builder.addCase(createOrder.fulfilled, (state, action) => {
             state.order = action.payload;
             state.error = null;
             state.loading = false;
         });
-        builder.addCase(orderItemAction.rejected, (state, action) => {
+        builder.addCase(createOrder.rejected, (state, action) => {
             state.error = action.payload;
             state.loading = false;
         });
         // get single order
-        builder.addCase(getOrderDataAction.pending, (state, action) => {
+        builder.addCase(getOrder.pending, (state, action) => {
             state.order = null;
             state.loading = true;
         });
-        builder.addCase(getOrderDataAction.fulfilled, (state, action) => {
+        builder.addCase(getOrder.fulfilled, (state, action) => {
             state.order = action.payload;
             state.error = null;
             state.loading = false;
         });
-        builder.addCase(getOrderDataAction.rejected, (state, action) => {
+        builder.addCase(getOrder.rejected, (state, action) => {
             state.error = action.payload;
             state.loading = false;
         });
         // pay order
-        builder.addCase(payOrderAction.pending, (state, action) => {
+        builder.addCase(payOrder.pending, (state, action) => {
             state.loading = true;
         });
-        builder.addCase(payOrderAction.fulfilled, (state, action) => {
+        builder.addCase(payOrder.fulfilled, (state, action) => {
             state.order = { ...state.order, ...action.payload };
             state.error = null;
             state.loading = false;
         });
-        builder.addCase(payOrderAction.rejected, (state, action) => {
+        builder.addCase(payOrder.rejected, (state, action) => {
             state.error = action.payload;
             state.loading = false;
         });
         // get user orders
-        builder.addCase(getUserOrdersAction.pending, (state, action) => {
+        builder.addCase(getOrders.pending, (state, action) => {
             state.loading = true;
         });
-        builder.addCase(getUserOrdersAction.fulfilled, (state, action) => {
+        builder.addCase(getOrders.fulfilled, (state, action) => {
             state.items = action.payload;
             state.error = null;
             state.loading = false;
         });
-        builder.addCase(getUserOrdersAction.rejected, (state, action) => {
+        builder.addCase(getOrders.rejected, (state, action) => {
             state.error = action.payload;
             state.loading = false;
         });

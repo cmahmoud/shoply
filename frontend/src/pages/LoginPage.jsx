@@ -1,4 +1,4 @@
-import loginAction from "app/actions/login.action";
+import loginAction from "app/actions/auth/login";
 import React, { useEffect } from "react";
 import { Alert, Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";

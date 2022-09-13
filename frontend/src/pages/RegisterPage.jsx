@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Alert, Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import registerAction from "app/actions/register.action";
+import registerAction from "app/actions/auth/register";
 import Loader from "components/Loader";
 
 export default function RegisterPage() {

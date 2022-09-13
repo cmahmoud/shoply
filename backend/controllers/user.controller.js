@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const isAuthenticated = require("../middleware/auth");
+const isAdmin = require("../middleware/admin");
 
 // @desc Get user profile
 // @route /api/user/profile
@@ -15,6 +16,19 @@ module.exports.profile = [
             isAdmin: user.isAdmin,
             email: user.email,
         });
+    },
+];
+
+// @desc Get all users
+// @route /api/user
+// @method Get
+// @access Private
+module.exports.getAll = [
+    isAuthenticated,
+    isAdmin,
+    async (req, res) => {
+        const users = await User.find({}).select("-password");
+        res.status(200).json(users);
     },
 ];
 

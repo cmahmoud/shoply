@@ -1,11 +1,11 @@
-import getOrderDataAction from "app/actions/getOrderData.action";
+import getOrder from "app/actions/order/getOrder";
 import React, { useEffect } from "react";
 import { Alert, Button, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Loader from "components/Loader";
-import payOrderAction from "app/actions/payOrder.action";
+import payOrder from "app/actions/order/payOrder";
 
 export default function OrderPage() {
     const dispatch = useDispatch();
@@ -18,12 +18,12 @@ export default function OrderPage() {
         if (!user) {
             navigate("/login", { state: { from: `/order/${id}` } });
         } else {
-            dispatch(getOrderDataAction(id));
+            dispatch(getOrder(id));
         }
     }, [dispatch, id, user, navigate]);
 
     const handleOrderPay = () => {
-        dispatch(payOrderAction(order._id));
+        dispatch(payOrder(order._id));
     };
 
     return loading ? (

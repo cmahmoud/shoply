@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import fetchProducts from "app/actions/products.action";
-import fetchProductById from "app/actions/product.action";
+import getAllProducts from "app/actions/products/getAll";
+import getProductById from "app/actions/products/getById";
 
 const initialState = {
     list: [],
@@ -12,19 +12,19 @@ const productSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchProducts.pending, (state, action) => {
+        builder.addCase(getAllProducts.pending, (state, action) => {
             state.list = [];
             state.loading = true;
         });
-        builder.addCase(fetchProducts.fulfilled, (state, action) => {
+        builder.addCase(getAllProducts.fulfilled, (state, action) => {
             state.list = action.payload;
             state.loading = false;
         });
-        builder.addCase(fetchProductById.pending, (state, action) => {
+        builder.addCase(getProductById.pending, (state, action) => {
             state.item = {};
             state.loading = true;
         });
-        builder.addCase(fetchProductById.fulfilled, (state, action) => {
+        builder.addCase(getProductById.fulfilled, (state, action) => {
             state.item = action.payload;
             state.loading = false;
         });

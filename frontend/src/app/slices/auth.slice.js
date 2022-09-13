@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import loginAction from "app/actions/login.action";
-import profileDataAction from "app/actions/profileData.action";
-import registerAction from "app/actions/register.action";
-import updateProfileAction from "app/actions/updateProfile.action";
+import loginAction from "app/actions/auth/login";
+import getProfile from "app/actions/user/getProfile";
+import registerAction from "app/actions/auth/register";
+import updateProfile from "app/actions/user/updateProfile";
 
 const initialState = {
     user: localStorage.getItem("user")
@@ -57,32 +57,32 @@ const authSlice = createSlice({
             state.error = action.payload;
         });
         // @Desc Get Profile
-        builder.addCase(profileDataAction.pending, (state, action) => {
+        builder.addCase(getProfile.pending, (state, action) => {
             state.profile = null;
             state.loading = true;
         });
-        builder.addCase(profileDataAction.fulfilled, (state, action) => {
+        builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;
             state.loading = false;
             state.error = null;
         });
-        builder.addCase(profileDataAction.rejected, (state, action) => {
+        builder.addCase(getProfile.rejected, (state, action) => {
             state.profile = null;
             state.loading = false;
             state.error = action.payload;
         });
         // @Desc Update Profile
-        builder.addCase(updateProfileAction.pending, (state, action) => {
+        builder.addCase(updateProfile.pending, (state, action) => {
             state.loading = true;
         });
-        builder.addCase(updateProfileAction.fulfilled, (state, action) => {
+        builder.addCase(updateProfile.fulfilled, (state, action) => {
             state.user = action.payload;
             state.profile = action.payload;
             state.loading = false;
             state.error = null;
             localStorage.setItem("user", JSON.stringify(action.payload));
         });
-        builder.addCase(updateProfileAction.rejected, (state, action) => {
+        builder.addCase(updateProfile.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
         });

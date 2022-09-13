@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import profileDataAction from "app/actions/profileData.action";
-import updateProfileAction from "app/actions/updateProfile.action";
+import getProfile from "app/actions/user/getProfile";
+import updateProfile from "app/actions/user/updateProfile";
 import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import getUserOrdersAction from "app/actions/getUserOrders.action";
+import getOrders from "app/actions/user/getOrders";
 import Loader from "components/Loader";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -15,8 +15,8 @@ export default function ProfilePage() {
     const { items, loading } = useSelector((state) => state.orders);
     useEffect(() => {
         if (user) {
-            dispatch(profileDataAction());
-            dispatch(getUserOrdersAction());
+            dispatch(getProfile());
+            dispatch(getOrders());
         } else {
             navigate("/login");
         }
@@ -26,7 +26,7 @@ export default function ProfilePage() {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
-        dispatch(updateProfileAction(data));
+        dispatch(updateProfile(data));
     };
     return (
         <Row>

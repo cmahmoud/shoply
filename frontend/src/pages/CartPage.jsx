@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSearchParams, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import addToCartAction from "app/actions/addToCart.action";
+import addItem from "app/actions/cart/addItem";
 import { removeItemFromCart } from "app/slices/cart.slice";
 import {
     Col,
@@ -26,7 +26,7 @@ export default function CartPage() {
     const cart = useSelector((state) => state.cart.items);
     useEffect(() => {
         if (id) {
-            dispatch(addToCartAction({ id, qty }));
+            dispatch(addItem({ id, qty }));
         }
     }, [dispatch, id, qty]);
     const removeItemHandler = (id) => {
@@ -75,7 +75,7 @@ export default function CartPage() {
                                                     value={item.qty}
                                                     onChange={(e) =>
                                                         dispatch(
-                                                            addToCartAction({
+                                                            addItem({
                                                                 id: item.product,
                                                                 qty: Number(
                                                                     e.target

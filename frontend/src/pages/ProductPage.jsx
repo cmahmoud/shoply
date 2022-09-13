@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "components/Rating";
-import fetchProductById from "app/actions/product.action";
+import getProductById from "app/actions/products/getById";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "components/Loader";
 
@@ -24,7 +24,7 @@ export default function ProductPage() {
     const loading = useSelector((state) => state.products.loading);
 
     useEffect(() => {
-        dispatch(fetchProductById(id));
+        dispatch(getProductById(id));
     }, [id, dispatch]);
 
     const addToCartHandler = () => {

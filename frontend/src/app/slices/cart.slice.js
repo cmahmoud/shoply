@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import addItemToCart from "app/actions/addToCart.action";
+import addItem from "app/actions/cart/addItem";
 
 const items = localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
@@ -41,10 +41,10 @@ const cartSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(addItemToCart.pending, (state, action) => {
+        builder.addCase(addItem.pending, (state, action) => {
             state.items = [...state.items];
         });
-        builder.addCase(addItemToCart.fulfilled, (state, action) => {
+        builder.addCase(addItem.fulfilled, (state, action) => {
             const item = action.payload;
             const isExist = state.items.find((x) => x.product === item.product);
             if (isExist) {
