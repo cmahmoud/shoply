@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
 const ProductRoutes = require("./routes/product.route");
 const UserRoutes = require("./routes/user.route");
+const OrderRoutes = require("./routes/order.route");
 
 dotenv.config();
 connectDB();
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Api Routes
 app.use("/api/products", ProductRoutes);
 app.use("/api/user", UserRoutes);
+app.use("/api/order", OrderRoutes);
 
 // run server
 app.listen(

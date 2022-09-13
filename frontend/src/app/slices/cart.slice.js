@@ -1,10 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import addItemToCart from "app/actions/addToCart.action";
 
+const items = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
+
+const shippingAddress = localStorage.getItem("shippingAddress")
+    ? JSON.parse(localStorage.getItem("shippingAddress"))
+    : {};
+
+const payment = localStorage.getItem("payment")
+    ? JSON.parse(localStorage.getItem("payment"))
+    : {};
+
 const initialState = {
-    items: localStorage.getItem("cart")
-        ? JSON.parse(localStorage.getItem("cart"))
-        : [],
+    items,
+    shippingAddress,
+    payment,
 };
 const cartSlice = createSlice({
     name: "cart",
@@ -15,6 +27,17 @@ const cartSlice = createSlice({
                 (x) => x.product !== action.payload
             );
             localStorage.setItem("cart", JSON.stringify(state.items));
+        },
+        addShippingAddress: (state, action) => {
+            state.shippingAddress = action.payload;
+            localStorage.setItem(
+                "shippingAddress",
+                JSON.stringify(state.shippingAddress)
+            );
+        },
+        addPaymentMethod: (state, action) => {
+            state.payment = action.payload;
+            localStorage.setItem("payment", JSON.stringify(state.payment));
         },
     },
     extraReducers: (builder) => {
@@ -36,6 +59,7 @@ const cartSlice = createSlice({
     },
 });
 
-export const { removeItemFromCart } = cartSlice.actions;
+export const { removeItemFromCart, addShippingAddress, addPaymentMethod } =
+    cartSlice.actions;
 
 export default cartSlice;

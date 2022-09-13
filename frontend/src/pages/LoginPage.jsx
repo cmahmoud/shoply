@@ -4,11 +4,14 @@ import { Alert, Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import Loader from "components/Loader";
+import { useLocation } from "react-router-dom";
 
 export default function LoginPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const params = useLocation();
     const auth = useSelector((state) => state.auth);
+    console.log();
     useEffect(() => {
         if (auth.user) {
             navigate("/");
@@ -19,6 +22,9 @@ export default function LoginPage() {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
         dispatch(loginAction(data));
+        if (!auth.error && params.state) {
+            navigate(params.state.from);
+        }
     };
     return auth.loading ? (
         <Loader />

@@ -44,7 +44,7 @@ export default function ProductPage() {
                         <Image alt={product.name} src={product.image} fluid />
                     </Col>
                     <Col md={4}>
-                        <ListGroup variant="flush">
+                        <ListGroup>
                             <ListGroup.Item>
                                 <h3>{product.name}</h3>
                             </ListGroup.Item>

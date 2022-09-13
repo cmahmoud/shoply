@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "pages/LoginPage";
 import RegisterPage from "pages/RegisterPage";
 import ProfilePage from "pages/ProfilePage";
+import ShippingPage from "pages/ShippingPage";
+import PaymentPage from "pages/PaymentPage";
+import PlaceOrderPage from "pages/PlaceOrderPage";
+import OrderPage from "pages/OrderPage";
 
 export default function App() {
     return (
@@ -34,6 +38,16 @@ export default function App() {
                                 <Route path=":id" element={<CartPage />} />
                                 <Route index element={<CartPage />} />
                             </Route>
+                            <Route
+                                path="/shipping"
+                                element={<ShippingPage />}
+                            />
+                            <Route path="/payment" element={<PaymentPage />} />
+                            <Route
+                                path="/placeorder"
+                                element={<PlaceOrderPage />}
+                            />
+                            <Route path="/order/:id" element={<OrderPage />} />
                         </Routes>
                     </Container>
                 </main>

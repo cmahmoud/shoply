@@ -3,10 +3,16 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "app/slices/auth.slice";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const auth = useSelector((state) => state.auth);
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/", { replace: true });
+    };
     return (
         <header>
             <Navbar
@@ -39,9 +45,7 @@ export default function Header() {
                                             Profile
                                         </NavDropdown.Item>
                                     </LinkContainer>
-                                    <NavDropdown.Item
-                                        onClick={() => dispatch(logout())}
-                                    >
+                                    <NavDropdown.Item onClick={handleLogout}>
                                         Logout
                                     </NavDropdown.Item>
                                 </NavDropdown>

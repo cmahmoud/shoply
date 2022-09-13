@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useSearchParams, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import addToCartAction from "app/actions/addToCart.action";
 import { removeItemFromCart } from "app/slices/cart.slice";
@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 export default function CartPage() {
     const dispatch = useDispatch();
     const { id } = useParams();
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.user);
     let [searchParams] = useSearchParams();
     const qty = Number(searchParams.get("qty"));
     const cart = useSelector((state) => state.cart.items);
@@ -31,7 +33,11 @@ export default function CartPage() {
         dispatch(removeItemFromCart(id));
     };
     const checkoutHandler = () => {
-        console.log("checkout handler");
+        if (user) {
+            navigate("/shipping");
+        } else {
+            navigate("/login", { state: { from: "/shipping" } });
+        }
     };
     return (
         <Container>
@@ -43,7 +49,7 @@ export default function CartPage() {
                             Your cart is empty <Link to="/">Go Back</Link>
                         </Alert>
                     ) : (
-                        <ListGroup variant="flush">
+                        <ListGroup>
                             {cart?.map((item) => {
                                 return (
                                     <ListGroup.Item key={item.product}>
