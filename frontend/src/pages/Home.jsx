@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import getAllProducts from "app/actions/products/getAll";
 import Loader from "components/Loader";
 
-export default function HomePage() {
+export default function Home() {
     const dispatch = useDispatch();
     const { list, loading } = useSelector((state) => state.products);
     useEffect(() => {

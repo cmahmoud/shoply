@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import Loader from "components/Loader";
 import payOrder from "app/actions/order/payOrder";
 
-export default function OrderPage() {
+export default function Order() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);

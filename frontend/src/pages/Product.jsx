@@ -15,7 +15,7 @@ import getProductById from "app/actions/products/getById";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "components/Loader";
 
-export default function ProductPage() {
+export default function Product() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();

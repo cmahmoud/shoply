@@ -16,7 +16,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function CartPage() {
+export default function Cart() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const navigate = useNavigate();

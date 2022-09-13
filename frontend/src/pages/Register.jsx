@@ -5,7 +5,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import registerAction from "app/actions/auth/register";
 import Loader from "components/Loader";
 
-export default function RegisterPage() {
+export default function Register() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [message, setMessage] = useState(null);

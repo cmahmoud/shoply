@@ -8,7 +8,7 @@ import getOrders from "app/actions/user/getOrders";
 import Loader from "components/Loader";
 import { LinkContainer } from "react-router-bootstrap";
 
-export default function ProfilePage() {
+export default function Profile() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { profile, user } = useSelector((state) => state.auth);

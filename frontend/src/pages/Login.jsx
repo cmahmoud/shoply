@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Loader from "components/Loader";
 import { useLocation } from "react-router-dom";
 
-export default function LoginPage() {
+export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useLocation();

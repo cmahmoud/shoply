@@ -5,7 +5,7 @@ import CheckoutSteps from "components/CheckoutSteps";
 import { Link, useNavigate } from "react-router-dom";
 import createOrder from "app/actions/order/createOrder";
 
-export default function PlaceOrderPage() {
+export default function PlaceOrder() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

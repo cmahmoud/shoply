@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import getUsers from "app/actions/admin/getUsers";
+import { createSlice } from '@reduxjs/toolkit';
+
+import getUsers from 'app/actions/admin/getUsers';
 
 const initialState = {
     users: null,
@@ -7,7 +8,7 @@ const initialState = {
     error: null,
 };
 const adminSlice = createSlice({
-    name: "admin",
+    name: 'admin',
     initialState,
     reducers: {},
     extraReducers: (builder) => {

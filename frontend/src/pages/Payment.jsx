@@ -5,7 +5,7 @@ import { addPaymentMethod } from "app/slices/cart";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "components/CheckoutSteps";
 
-export default function PaymentPage() {
+export default function Payment() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { shippingAddress, payment } = useSelector((state) => state.cart);

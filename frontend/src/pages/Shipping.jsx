@@ -5,7 +5,7 @@ import { addShippingAddress } from "app/slices/cart";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "components/CheckoutSteps";
 
-export default function ShippingPage() {
+export default function Shipping() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const shippingAddress = useSelector((state) => state.cart.shippingAddress);
