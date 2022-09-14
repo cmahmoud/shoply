@@ -5,6 +5,7 @@ import Order from './Order';
 import Payment from './Payment';
 import PlaceOrder from './PlaceOrder';
 import Product from './Product';
+import ProductList from './ProductList';
 import Profile from './Profile';
 import Register from './Register';
 import Shipping from './Shipping';
@@ -24,4 +25,5 @@ export {
     PlaceOrder,
     UserList,
     UserEdit,
+    ProductList,
 };

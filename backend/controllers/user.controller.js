@@ -79,6 +79,7 @@ module.exports.updateProfile = [
 // @access Private
 module.exports.updateUserById = [
     isAuthenticated,
+    isAdmin,
     async (req, res) => {
         const user = await User.findById(req.params.id).select("-password");
         if (!user) {
