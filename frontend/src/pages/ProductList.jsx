@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
+import createProduct from 'app/actions/products/createProduct';
 import deleteProduct from 'app/actions/products/deleteProduct';
 import getAllProducts from 'app/actions/products/getAll';
 
@@ -12,6 +13,7 @@ export default function ProductList() {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
     const products = useSelector((state) => state.products.list);
+    const item = useSelector((state) => state.products.item);
 
     useEffect(() => {
         if (user && user.isAdmin) {
@@ -24,6 +26,12 @@ export default function ProductList() {
     const handleDeleteProduct = (id) => {
         dispatch(deleteProduct(id));
     };
+    const handleCreateProduct = () => {
+        dispatch(createProduct());
+        if (item) {
+            navigate(`/admin/product/${item._id}/edit`);
+        }
+    };
     return (
         <>
             <Row className="align-items-center">
@@ -31,7 +39,11 @@ export default function ProductList() {
                     <h1>Products</h1>
                 </Col>
                 <Col className="text-end">
-                    <Button className="my-3" variant="dark">
+                    <Button
+                        className="my-3"
+                        variant="dark"
+                        onClick={handleCreateProduct}
+                    >
                         <i className="fas fa-plus" /> Create Product
                     </Button>
                 </Col>
@@ -44,6 +56,7 @@ export default function ProductList() {
                         <th>Price</th>
                         <th>Category</th>
                         <th>Brand</th>
+                        <th>Count</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -55,6 +68,7 @@ export default function ProductList() {
                             <td>{product.price}</td>
                             <td>{product.category}</td>
                             <td>{product.brand}</td>
+                            <td>{product.countInStock}</td>
                             <td>
                                 <LinkContainer
                                     to={`/admin/product/${product._id}/edit`}

@@ -6,6 +6,7 @@ import {
     Payment,
     PlaceOrder,
     Product,
+    ProductEdit,
     ProductList,
     Profile,
     Register,
@@ -55,6 +56,10 @@ export default function App() {
                             <Route
                                 path="/admin/products"
                                 element={<ProductList />}
+                            />
+                            <Route
+                                path="/admin/product/:id/edit"
+                                element={<ProductEdit />}
                             />
                         </Routes>
                     </Container>

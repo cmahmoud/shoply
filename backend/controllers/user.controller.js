@@ -13,6 +13,9 @@ module.exports.profile = [
     isAuthenticated,
     async (req, res) => {
         const user = await User.findById(req.user.id).select("-password");
+        if (!user) {
+            return res.status(200).json("invalid id");
+        }
         res.status(200).json({
             id: user._id,
             name: user.name,

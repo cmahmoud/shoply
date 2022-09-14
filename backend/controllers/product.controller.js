@@ -25,6 +25,47 @@ module.exports.getById = [
         res.status(200).json(product);
     },
 ];
+// @desc Create Product
+// @route /api/products/
+// @method POST
+// @access Private
+module.exports.createProduct = [
+    isAuthenticated,
+    isAdmin,
+    async (req, res) => {
+        const product = new Product({
+            name: "sample",
+            price: 0,
+            user: req.user.id,
+            image: "/images/sample.jpg",
+            brand: "Sample",
+            category: "sample",
+            countInStock: 0,
+            numReviews: 0,
+            rating: 1,
+            description: "sample desc",
+        });
+        await product.save();
+        res.status(200).json(product);
+    },
+];
+// @desc Update Product
+// @route /api/products/:id/update
+// @method PUT
+// @access Private
+module.exports.updateProduct = [
+    isAuthenticated,
+    isAdmin,
+    isValidId,
+    async (req, res) => {
+        const product = await Product.findByIdAndUpdate(
+            req.params.id,
+            { ...req.body },
+            { new: true }
+        );
+        res.status(200).json(product);
+    },
+];
 // @desc Delete Product
 // @route /api/products/:id/delete
 // @method DELETE
