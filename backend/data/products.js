@@ -1,3 +1,5 @@
+const { faker } = require("@faker-js/faker");
+
 const products = [
     {
         name: "Airpods Wireless Bluetooth Headphones",
@@ -70,6 +72,39 @@ const products = [
         countInStock: 0,
         rating: 4,
         numReviews: 12,
+    },
+    {
+        name: faker.commerce.productName(),
+        image: "/images/alexa.jpg",
+        description: faker.commerce.productDescription(),
+        brand: faker.company.name(),
+        category: "Electronics",
+        price: faker.commerce.price(100),
+        countInStock: faker.datatype.number({ max: 1000 }),
+        rating: faker.datatype.float({ min: 0, max: 5, precision: 0.5 }),
+        numReviews: faker.datatype.number({ min: 1, max: 1000 }),
+    },
+    {
+        name: faker.commerce.productName(),
+        image: "/images/playstation.jpg",
+        description: faker.commerce.productDescription(),
+        brand: faker.company.name(),
+        category: "Electronics",
+        price: faker.commerce.price(100),
+        countInStock: faker.datatype.number({ max: 1000 }),
+        rating: faker.datatype.float({ min: 0, max: 5, precision: 0.5 }),
+        numReviews: faker.datatype.number({ min: 1, max: 1000 }),
+    },
+    {
+        name: faker.commerce.productName(),
+        image: "/images/mouse.jpg",
+        description: faker.commerce.productDescription(),
+        brand: faker.company.name(),
+        category: "Electronics",
+        price: faker.commerce.price(100),
+        countInStock: faker.datatype.number({ max: 1000 }),
+        rating: faker.datatype.float({ min: 0, max: 5, precision: 0.5 }),
+        numReviews: faker.datatype.number({ min: 1, max: 1000 }),
     },
 ];
 module.exports = products;

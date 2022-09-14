@@ -1,22 +1,37 @@
 const bcrypt = require("bcryptjs");
-const casual = require("casual");
+const { faker } = require("@faker-js/faker");
 
 const users = [
     {
-        name: casual.full_name,
+        name: faker.name.fullName(),
         email: "admin@test.com",
         password: bcrypt.hashSync("12345678", 10),
         isAdmin: true,
     },
     {
-        name: casual.full_name,
-        email: "sandy@test.com",
-        password: bcrypt.hashSync("12345678", 10),
+        name: faker.name.fullName(),
+        email: faker.internet.exampleEmail(),
+        password: bcrypt.hashSync(faker.random.alpha(10), 10),
     },
     {
-        name: casual.full_name,
-        email: "john@test.com",
-        password: bcrypt.hashSync("12345678", 10),
+        name: faker.name.fullName(),
+        email: faker.internet.exampleEmail(),
+        password: bcrypt.hashSync(faker.random.alpha(10), 10),
+    },
+    {
+        name: faker.name.fullName(),
+        email: faker.internet.exampleEmail(),
+        password: bcrypt.hashSync(faker.random.alpha(10), 10),
+    },
+    {
+        name: faker.name.fullName(),
+        email: faker.internet.exampleEmail(),
+        password: bcrypt.hashSync(faker.random.alpha(10), 10),
+    },
+    {
+        name: faker.name.fullName(),
+        email: faker.internet.exampleEmail(),
+        password: bcrypt.hashSync(faker.random.alpha(10), 10),
     },
 ];
 module.exports = users;
