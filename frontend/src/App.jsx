@@ -29,7 +29,6 @@ export default function App() {
                 <main className="py-3 h-100">
                     <Container className="h-100">
                         <Routes>
-                            <Route index path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/profile">
                                 <Route path=":id" element={<Profile />} />
@@ -66,6 +65,8 @@ export default function App() {
                                 path="/admin/orders"
                                 element={<OrdersList />}
                             />
+                            <Route path="/search" element={<Home />} />
+                            <Route index path="/" element={<Home />} />
                         </Routes>
                     </Container>
                 </main>

@@ -17,6 +17,7 @@ import addReview from 'app/actions/products/addReview';
 import getProductById from 'app/actions/products/getById';
 
 import Loader from 'components/Loader';
+import Meta from 'components/Meta';
 import Rating from 'components/Rating';
 
 export default function Product() {
@@ -50,6 +51,11 @@ export default function Product() {
             </Link>
             {product && (
                 <>
+                    <Meta
+                        title={product.name}
+                        description={product.description}
+                        keywords={product.category}
+                    />
                     <Row className="mb-3">
                         <Col md={4}>
                             <Image

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { logout } from 'app/slices/auth';
 
+import SearchBox from './SearchBox';
+
 export default function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -78,6 +80,7 @@ export default function Header() {
                                 </LinkContainer>
                             )}
                         </Nav>
+                        <SearchBox />
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
