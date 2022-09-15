@@ -13,7 +13,6 @@ export default function OrdersList() {
     useEffect(() => {
         dispatch(getOrders());
     }, [dispatch]);
-    orders && console.log(orders[0].totalPrice);
     return (
         <div>
             <h1>Orders</h1>

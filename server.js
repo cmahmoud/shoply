@@ -29,6 +29,12 @@ app.use("/api/order", OrderRoutes);
 app.use("/api/upload", UploadRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.use(express.static(path.join(path.join(__dirname, "frontend/build"))));
+
+app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+});
 // run server
 app.listen(
     port,

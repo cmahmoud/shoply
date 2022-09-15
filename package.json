@@ -1,6 +1,7 @@
 {
     "name": "shoply",
     "version": "1.0.0",
+    "homepage": "/",
     "description": "mern shop app",
     "main": "server.js",
     "author": "officialzoka <golldenhouse@gmail.com>",
