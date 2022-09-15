@@ -7,21 +7,31 @@ import getAllProducts from 'app/actions/products/getAll';
 
 import Loader from 'components/Loader';
 import Meta from 'components/Meta';
+import Paginator from 'components/Paginator';
 import ProductCard from 'components/ProductCard';
 
 export default function Home() {
     const dispatch = useDispatch();
-    const { list, loading } = useSelector((state) => state.products);
+    const {
+        list,
+        loading,
+        pages,
+        page: pageIndex,
+    } = useSelector((state) => state.products);
     const [searchParams] = useSearchParams();
     const keyword = searchParams.get('keyword');
+    const page = searchParams.get('page');
     useEffect(() => {
-        if (keyword) {
-            dispatch(getAllProducts(keyword));
+        if (keyword && page) {
+            dispatch(getAllProducts({ keyword, page }));
+        } else if (keyword && !page) {
+            dispatch(getAllProducts({ keyword, page: '' }));
+        } else if (!keyword && page) {
+            dispatch(getAllProducts({ page, keyword: '' }));
         } else {
-            dispatch(getAllProducts());
+            dispatch(getAllProducts({ keyword: '', page: '' }));
         }
-    }, [dispatch, keyword]);
-
+    }, [dispatch, keyword, page]);
     return loading ? (
         <Loader />
     ) : (
@@ -31,7 +41,7 @@ export default function Home() {
                 description="Shop that contain all products you dream"
                 keywords="shop,products,product,store,ecommrce"
             />
-            <h1>Latest Products</h1>
+            <h1>{keyword ? 'Search Results' : 'Latest Products'}</h1>
             <Container>
                 <Row>
                     {list?.map((product) => {
@@ -42,6 +52,7 @@ export default function Home() {
                         );
                     })}
                 </Row>
+                <Paginator page={pageIndex} pages={pages} keyword={keyword} />
             </Container>
         </>
     );

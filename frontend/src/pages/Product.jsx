@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import addReview from 'app/actions/products/addReview';
 import getProductById from 'app/actions/products/getById';
@@ -24,6 +25,7 @@ export default function Product() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
     const [qty, setQty] = useState(1);
     const product = useSelector((state) => state.products.item);
     const { loading, error } = useSelector((state) => state.products);
@@ -41,12 +43,14 @@ export default function Product() {
         const data = Object.fromEntries(new FormData(e.target).entries());
         dispatch(addReview({ ...data, id: product._id }));
     };
-
     return loading ? (
         <Loader />
     ) : (
         <div>
-            <Link to="/" className="btn btn-dark my-3">
+            <Link
+                to={location.state ? location.state.from : '/'}
+                className="btn btn-dark my-3"
+            >
                 Go Back
             </Link>
             {product && (

@@ -9,6 +9,9 @@ const User = require("../models/user.model");
 // @method GET
 // @access Public
 module.exports.getAll = async (req, res) => {
+    const pageSize = 4;
+    const page = Number(req.query.page) || 1;
+
     const keyword = req.query.keyword
         ? {
               name: {
@@ -17,8 +20,15 @@ module.exports.getAll = async (req, res) => {
               },
           }
         : {};
-    const products = await Product.find(keyword);
-    res.status(200).json(products);
+    const count = await Product.countDocuments(keyword);
+    const products = await Product.find(keyword)
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
+    res.status(200).json({
+        products,
+        page,
+        pages: Math.ceil(count / pageSize),
+    });
 };
 // @desc Fetch Single Product
 // @route /api/products/:id
@@ -125,5 +135,15 @@ module.exports.addReview = [
         product.rating = total / product.reviews.length;
         await product.save();
         res.status(201).json({ message: "Review Added" });
+    },
+];
+// @desc Get Top Products
+// @route /api/products/top
+// @method GET
+// @access Public
+module.exports.getTopRated = [
+    async (req, res) => {
+        const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+        res.status(200).json(products);
     },
 ];

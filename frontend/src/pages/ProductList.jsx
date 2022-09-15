@@ -2,26 +2,38 @@ import React, { useEffect } from 'react';
 import { Button, Col, Row, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import createProduct from 'app/actions/products/createProduct';
 import deleteProduct from 'app/actions/products/deleteProduct';
 import getAllProducts from 'app/actions/products/getAll';
 
+import Paginator from 'components/Paginator';
+
 export default function ProductList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const page = searchParams.get('page');
     const user = useSelector((state) => state.auth.user);
-    const products = useSelector((state) => state.products.list);
-    const item = useSelector((state) => state.products.item);
+    const {
+        item,
+        pages,
+        page: pageIndex,
+        list: products,
+    } = useSelector((state) => state.products);
 
     useEffect(() => {
         if (user && user.isAdmin) {
-            dispatch(getAllProducts());
+            if (page) {
+                dispatch(getAllProducts({ page, keyword: '' }));
+            } else {
+                dispatch(getAllProducts({ keyword: '', page: '' }));
+            }
         } else {
             navigate('/');
         }
-    }, [dispatch, user, navigate]);
+    }, [dispatch, user, navigate, page]);
 
     const handleDeleteProduct = (id) => {
         dispatch(deleteProduct(id));
@@ -91,6 +103,7 @@ export default function ProductList() {
                     ))}
                 </tbody>
             </Table>
+            <Paginator page={pageIndex} pages={pages} isAdmin />
         </>
     );
 }

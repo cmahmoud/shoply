@@ -13,6 +13,8 @@ const initialState = {
     item: {},
     loading: false,
     error: null,
+    page: null,
+    pages: null,
 };
 const productSlice = createSlice({
     name: 'products',
@@ -23,8 +25,10 @@ const productSlice = createSlice({
             state.list = [];
             state.loading = true;
         });
-        builder.addCase(getAllProducts.fulfilled, (state, action) => {
-            state.list = action.payload;
+        builder.addCase(getAllProducts.fulfilled, (state, { payload }) => {
+            state.list = payload.products;
+            state.page = payload.page;
+            state.pages = payload.pages;
             state.loading = false;
         });
         builder.addCase(getProductById.pending, (state, action) => {
