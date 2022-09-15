@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import addReview from 'app/actions/products/addReview';
 import createProduct from 'app/actions/products/createProduct';
 import deleteProduct from 'app/actions/products/deleteProduct';
 import getAllProducts from 'app/actions/products/getAll';
@@ -87,6 +88,17 @@ const productSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(uploadImage.rejected, (state, { payload }) => {
+            state.error = payload;
+            state.loading = false;
+        });
+        /// add revie
+        builder.addCase(addReview.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(addReview.fulfilled, (state, { payload }) => {
+            state.loading = false;
+        });
+        builder.addCase(addReview.rejected, (state, { payload }) => {
             state.error = payload;
             state.loading = false;
         });

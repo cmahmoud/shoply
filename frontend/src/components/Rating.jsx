@@ -18,7 +18,7 @@ export default function Rating({ rating, reviews }) {
                     </span>
                 );
             })}
-            <span className="ms-2">{reviews} reviews</span>
+            {reviews && <span className="ms-2">{reviews} reviews</span>}
         </div>
     );
 }
