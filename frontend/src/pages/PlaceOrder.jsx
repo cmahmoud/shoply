@@ -29,7 +29,7 @@ export default function PlaceOrder() {
     );
 
     useEffect(() => {
-        if (order) {
+        if (!order.isPaid) {
             navigate(`/order/${order._id}`);
         }
     }, [navigate, order]);

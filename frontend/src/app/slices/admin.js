@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import deleteUser from 'app/actions/admin/deleteUser';
+import getOrders from 'app/actions/admin/getOrders';
 import getUser from 'app/actions/admin/getUser';
 import getUsers from 'app/actions/admin/getUsers';
 import updateUser from 'app/actions/admin/updateUser';
@@ -8,6 +9,8 @@ import updateUser from 'app/actions/admin/updateUser';
 const initialState = {
     users: null,
     user: null,
+    orders: null,
+    order: null,
     loading: false,
     error: null,
 };
@@ -65,6 +68,19 @@ const adminSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(deleteUser.rejected, (state, { payload }) => {
+            state.error = payload;
+            state.loading = false;
+        });
+        /// get Orders
+        builder.addCase(getOrders.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(getOrders.fulfilled, (state, { payload }) => {
+            state.orders = payload;
+            state.error = null;
+            state.loading = false;
+        });
+        builder.addCase(getOrders.rejected, (state, { payload }) => {
             state.error = payload;
             state.loading = false;
         });

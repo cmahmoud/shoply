@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import getAllProducts from 'app/actions/products/getAll';
@@ -19,16 +19,17 @@ export default function Home() {
     ) : (
         <>
             <h1>Latest Products</h1>
-
-            <Row>
-                {list?.map((product) => {
-                    return (
-                        <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                            <ProductCard product={product} />
-                        </Col>
-                    );
-                })}
-            </Row>
+            <Container>
+                <Row>
+                    {list?.map((product) => {
+                        return (
+                            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                                <ProductCard product={product} />
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </Container>
         </>
     );
 }

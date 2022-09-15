@@ -100,8 +100,8 @@ export default function Profile() {
                                                 )}
                                             </td>
                                             <td>
-                                                {item.isDelivered ? (
-                                                    item.deliveredAt.substring(
+                                                {item.isDelevered ? (
+                                                    item.deleverdAt.substring(
                                                         0,
                                                         10,
                                                     )

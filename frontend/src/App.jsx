@@ -3,6 +3,7 @@ import {
     Home,
     Login,
     Order,
+    OrdersList,
     Payment,
     PlaceOrder,
     Product,
@@ -60,6 +61,10 @@ export default function App() {
                             <Route
                                 path="/admin/product/:id/edit"
                                 element={<ProductEdit />}
+                            />
+                            <Route
+                                path="/admin/orders"
+                                element={<OrdersList />}
                             />
                         </Routes>
                     </Container>

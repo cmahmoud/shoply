@@ -2,6 +2,7 @@ import Cart from './Cart';
 import Home from './Home';
 import Login from './Login';
 import Order from './Order';
+import OrdersList from './OrdersList';
 import Payment from './Payment';
 import PlaceOrder from './PlaceOrder';
 import Product from './Product';
@@ -28,4 +29,5 @@ export {
     UserEdit,
     ProductList,
     ProductEdit,
+    OrdersList,
 };

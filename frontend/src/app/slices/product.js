@@ -82,7 +82,7 @@ const productSlice = createSlice({
             state.loading = true;
         });
         builder.addCase(uploadImage.fulfilled, (state, { payload }) => {
-            state.item = { ...state.item, image: payload.image };
+            state.item.image = payload.image;
             state.error = null;
             state.loading = false;
         });

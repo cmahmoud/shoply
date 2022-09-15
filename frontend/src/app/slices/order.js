@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import createOrder from 'app/actions/order/createOrder';
+import deliverOrder from 'app/actions/order/deliverOrder';
 import getOrder from 'app/actions/order/getOrder';
 import payOrder from 'app/actions/order/payOrder';
 import getOrders from 'app/actions/user/getOrders';
@@ -66,6 +67,19 @@ const orderSlice = createSlice({
         });
         builder.addCase(getOrders.rejected, (state, action) => {
             state.error = action.payload;
+            state.loading = false;
+        });
+        /// deliver Order
+        builder.addCase(deliverOrder.pending, (state, action) => {
+            state.loading = true;
+        });
+        builder.addCase(deliverOrder.fulfilled, (state, { payload }) => {
+            state.order = payload;
+            state.error = null;
+            state.loading = false;
+        });
+        builder.addCase(deliverOrder.rejected, (state, { payload }) => {
+            state.error = payload;
             state.loading = false;
         });
     },

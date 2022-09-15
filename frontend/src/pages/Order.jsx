@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
+import deliverOrder from 'app/actions/order/deliverOrder';
 import getOrder from 'app/actions/order/getOrder';
 import payOrder from 'app/actions/order/payOrder';
 
@@ -26,6 +27,9 @@ export default function Order() {
 
     const handleOrderPay = () => {
         dispatch(payOrder(order._id));
+    };
+    const handleDeliverOrder = () => {
+        dispatch(deliverOrder(order._id));
     };
 
     return loading ? (
@@ -55,9 +59,10 @@ export default function Order() {
                                     {order.shippingAddress?.postalcode},{' '}
                                     {order.shippingAddress?.country}
                                 </p>
-                                {order.isDelivered ? (
+                                {order.isDelevered ? (
                                     <Alert variant="success">
-                                        Paid on {order.deliveredAt}
+                                        Delivered on{' '}
+                                        {order.deleverdAt.substring(0, 10)}
                                     </Alert>
                                 ) : (
                                     <Alert variant="danger">
@@ -157,17 +162,32 @@ export default function Order() {
                                     </Alert>
                                 </ListGroup.Item>
                             )}
-                            <ListGroup.Item>
-                                <Button
-                                    variant="success"
-                                    type="button"
-                                    className="w-100"
-                                    onClick={handleOrderPay}
-                                    disabled={order.isPaid}
-                                >
-                                    Pay
-                                </Button>
-                            </ListGroup.Item>
+                            {!order.isPaid && (
+                                <ListGroup.Item>
+                                    <Button
+                                        variant="success"
+                                        type="button"
+                                        className="w-100"
+                                        onClick={handleOrderPay}
+                                    >
+                                        Pay
+                                    </Button>
+                                </ListGroup.Item>
+                            )}
+                            {user.isAdmin &&
+                                order.isPaid &&
+                                !order.isDelevered && (
+                                    <ListGroup.Item>
+                                        <Button
+                                            variant="dark"
+                                            type="button"
+                                            className="w-100"
+                                            onClick={handleDeliverOrder}
+                                        >
+                                            Deliver
+                                        </Button>
+                                    </ListGroup.Item>
+                                )}
                         </ListGroup>
                     </Col>
                 </Row>
